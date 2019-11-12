@@ -9,7 +9,7 @@ public class Document {
     Photo photo;
     List<Section> sections = new ArrayList<>();
 
-    Document(String title){
+    Document(String title) {
         this.title = title;
     }
 
@@ -25,7 +25,7 @@ public class Document {
     }
 
     Section addSection(String sectionTitle) {
-        Section newSection = new Section(sectionTitle){
+        Section newSection = new Section(sectionTitle) {
             @Override
             Section addParagraph(String paragraphText) {
                 return super.addParagraph(paragraphText);
@@ -42,17 +42,16 @@ public class Document {
 
 
     void writeHTML(PrintStream out) {
-        out.printf("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-        out.printf("<!DOCTYPE html\n" +
-                "        PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"\n" +
-                "        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n");
-        out.printf("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"pl\" lang=\"pl\">\n");
-        out.printf("<head>\n" +
+        out.printf("<!DOCTYPE html>\n" +
+                "<html lang=\"pl\">");
+        out.printf("<head>\n" + "    <meta charset=\"UTF-8\">\n" +
                 "    <title>%s</title>\n" +
                 "</head>\n", title);
         out.printf("<body>\n");
         out.printf("<div>\n");
-        for (Section s : sections){
+        out.printf("<h1>%s<h1>\n", this.title);
+        photo.writeHTML(out);
+        for (Section s : sections) {
             s.writeHTML(out);
         }
         out.printf("</div>\n");

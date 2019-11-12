@@ -7,8 +7,11 @@ import java.util.List;
 public class ParagraphWithList extends Paragraph {
     List<UnorderedList> unorderedLists = new ArrayList<>();
 
+    ParagraphWithList() {
+    }
+
     ParagraphWithList(String content) {
-        super(content);
+        this.content = content;
     }
 
     ParagraphWithList setContent(ParagraphWithList newContent) {
@@ -16,11 +19,17 @@ public class ParagraphWithList extends Paragraph {
         return this;
     }
 
+    UnorderedList setContent(String newList) {
+        UnorderedList tmp = new UnorderedList(newList);
+        unorderedLists.add(tmp);
+        return tmp;
+    }
+
     @Override
     void writeHTML(PrintStream out) {
         out.printf("<p>\n");
         out.printf("%s\n", content);
-        for (UnorderedList ul : unorderedLists){
+        for (UnorderedList ul : unorderedLists) {
             ul.writeHTML(out);
         }
         out.printf("</p>\n");

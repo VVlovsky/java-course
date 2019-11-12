@@ -51,7 +51,7 @@ public class Sum extends Node {
         for (Node a : args) {
             if (a.sign > 0 && args.get(0) != a) b.append(" + ");
             boolean useBracket = false;
-            if (a.sign < 0) {
+            if (a.getSign() < 0) {
                 useBracket = true;
                 b.append("(-");
             }
@@ -63,6 +63,14 @@ public class Sum extends Node {
 
         if (sign < 0) b.append(")");
         return b.toString();
+    }
+
+    Node diff(Variable var) {
+        Sum r = new Sum();
+        for (Node n : args) {
+            r.add(n.diff(var));
+        }
+        return r;
     }
 
 

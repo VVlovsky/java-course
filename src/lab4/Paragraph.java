@@ -8,6 +8,8 @@ public class Paragraph {
         this.setContent(content);
     }
 
+    Paragraph(){}
+
     String content;
 
     Paragraph setContent(String newContent) {
