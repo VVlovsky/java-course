@@ -169,5 +169,21 @@ public class Matrix {
         }
         return toReturn;
     }
+
+    Matrix getSubmatrix(int fromRow, int toRow, int fromCol, int toCol) {
+
+        if (toRow >= this.rows || toCol >= this.cols)
+            throw new RuntimeException("Error");
+
+        Matrix toReturn = new Matrix(toCol - fromCol, toRow - fromRow);
+        int dataI = 0;
+        for (int i = fromCol; i < toCol; i++) {
+            for (int i_two = fromRow; i_two < toRow; i_two++) {
+                toReturn.data[dataI] = this.data[i * this.rows + i_two];
+                dataI++;
+            }
+        }
+        return toReturn;
+    }
 }
 
