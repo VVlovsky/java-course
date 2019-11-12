@@ -172,7 +172,7 @@ public class Matrix {
 
     Matrix getSubmatrix(int fromRow, int toRow, int fromCol, int toCol) {
 
-        if (toRow >= this.rows || toCol >= this.cols)
+        if (toRow > this.rows || toCol > this.cols)
             throw new RuntimeException("Error");
 
         Matrix toReturn = new Matrix(toCol - fromCol, toRow - fromRow);
