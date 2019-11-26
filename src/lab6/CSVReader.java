@@ -3,10 +3,7 @@ package lab6;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CSVReader {
     BufferedReader reader;
@@ -43,13 +40,35 @@ public class CSVReader {
         if (line == null) {
             return false;
         }
-        current = line.split(delimiter);
+        String[] tmpCurrent = line.split(delimiter);
+        int addCounter = 0;
+        while (tmpCurrent.length + addCounter <= columnLabels.size()) {
+            addCounter++;
+        }
+//        int addCounter = columnLabels.size() - tmpCurrent.length;
+        List<String> tmp = new ArrayList<String>(Arrays.asList(tmpCurrent));
+        for (int i = 0; i < addCounter; i++){
+            tmp.add("");
+        }
+        current = tmp.toArray(new String[tmp.size()]);
+//        current = line.split(delimiter);
         return true;
     }
 
-    int getInt(String colName) {
+    public int getInt(String colName) {
         int i = columnLabelsToInt.get(colName);
+        if (current[i].equals("")) {
+            return 0;
+        }
         return Integer.parseInt(current[i]);
+    }
+
+    public double getDouble(String colName) {
+        int i = columnLabelsToInt.get(colName);
+        if (current[i].equals("")) {
+            return 0;
+        }
+        return Double.parseDouble(current[i]);
     }
 
     public String get(int index) {
