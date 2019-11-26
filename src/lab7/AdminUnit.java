@@ -34,9 +34,9 @@ public class AdminUnit {
         StringBuilder b = new StringBuilder();
         b.append("name: " + name + "\npopulation: " + population + "\narea: " + area + "\ndensity: " + density + "\n");
         b.append(bbox.toString());
-        b.append("\nTo map:\n");
+        b.append("To map:\n");
         b.append("LINESTRING(");
-        b.append(bbox.xmin + bbox.ymin + bbox.xmin + bbox.ymax + bbox.xmax + bbox.ymax + bbox.xmax + bbox.ymin + bbox.xmin + bbox.ymin);
+        b.append(bbox.xmin + " " + bbox.ymin + ", " + bbox.xmin + " " + bbox.ymax + ", " + bbox.xmax + " " + bbox.ymax + ", " + bbox.xmax + " " + bbox.ymin + ", " + bbox.xmin + " " + bbox.ymin + ")\n\n");
         return b.toString();
     }
 }
