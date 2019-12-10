@@ -11,6 +11,14 @@ public class AdminUnitList {
     String filepath = "/home/vvlovsky/Work/JavaProjects/JavaLabs/src/lab7/admin-units.csv";
     List<AdminUnit> units = new ArrayList<>();
 
+    AdminUnitList(List<AdminUnit> lst){
+        units = lst;
+    }
+
+    public AdminUnitList() {
+
+    }
+
     public void read() throws IOException {
         CSVReader reader = new CSVReader(filepath, ",", true);
         int counter = 0;
