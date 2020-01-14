@@ -1,0 +1,88 @@
+%Vyacheslav Trushkov
+%% Zmienne
+e_option = 0.4;
+T = 1000;
+t = 0:0.2:T;   % czas
+
+%% Przyklad 1
+figure;
+hold on;
+
+for option = -2:1:2
+        %system nieliniowy
+        sol = ode45(@(t,x) -x + e_option*x*x, [0 T], option);
+        y = deval(sol, t);
+        plot(t,y,'r')
+
+        %linearyzacja w 0
+        sol = ode45(@(t,x) -x, [0,T], option);
+        y = deval(sol, t);
+        plot(t,y,'g')
+
+        %linearyzacja w 1/e_option
+        sol = ode45(@(t,x) x - 1/e_option, [0 T], option);
+        y = deval(sol, t);
+        plot(t,y,'b')
+end
+
+axis([0 5 -10 5])
+title('Przyklad nr. 1')
+xlabel('t')
+ylabel('x(t)')
+legend('Rozwiaіzanie bez linearyzacji', 'Linearyzacja w 0', 'Linearyzacja w 1/e_{option}')
+
+%% Przyklad 2
+figure;
+
+[x1, x2] = meshgrid(-.5:0.1:0.5, -.5:.1:.5);
+xvar_1 = -x1;        % rownanie 1
+xvar_2 = -x2.^2;     % rownanie 2
+quiver(x1,x2,xvar_1, xvar_2, 1.2, 'LineWidth', 0.9);
+
+title('Przyklad 2 nieliniowy')
+xlabel('x1')
+ylabel('x2')
+
+%% Przyklad 3
+
+%nieliniowy
+figure;
+[x1, x2] = meshgrid(-1:0.2:1, -1:.2:1);
+xvar_1 = x2;
+xvar_2 = -2.*x1 -3.*(x1.^2)-x2;
+quiver(x1,x2,xvar_1, xvar_2, 1.2,'k','Autoscale','off');
+title('Przyklad 3 nieliniowy');
+xlabel('x1');
+ylabel('x2');
+axis([-1 1 -1 1]);
+
+%zlinearyzowany dla punktu (0,0)
+figure;
+[x1, x2] = meshgrid(-1:0.2:1, -1:.2:1);
+xvar_1 = x2;
+xvar_2 = -2.*x1 -1.*x2;
+quiver(x1,x2,xvar_1, xvar_2, 1.2,'k','Autoscale','off');
+title('Przyklad 3 zlinearyzowany dla punktu (0,0)');
+xlabel('x1');
+ylabel('x2');
+axis([-1 1 -1 1]);
+
+%zlinearyzowany dla punktu (-2/3, 0)
+figure;
+[x1, x2] = meshgrid(-1:0.2:1, -1:.2:1);
+xvar_1 = x2;
+xvar_2 = -2.*x1 -3.*(x1.^2)-x2;
+quiver(x1,x2,xvar_1, xvar_2, 1.2,'k','Autoscale','off');
+hold on;
+
+%linearyzacja dla punktu (-2/3,0)
+[z1, z2] = meshgrid(-1:0.2:1, -1:.2:1);
+z1dot = z2;
+z2dot = 2.*z1 + -1.*z2;
+quiver(z1-2/3,z2,z1dot, z2dot, 1.2,'g','Autoscale','off');
+title('Przyklad 3 zlinearyzowany dla punktu (-2/3,0)') ;
+xlabel('z1');
+ylabel('z2');
+axis([-1 1 -1 1]);
+legend('Portret oryginalnego systemu', 'Linearyzacja dla punktu rownowagi (-2/3;0)');
+hold off;
