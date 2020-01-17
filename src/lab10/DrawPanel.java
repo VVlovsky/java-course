@@ -16,6 +16,7 @@ public class DrawPanel extends JPanel{
         for(XmasShape s:shapes){
             s.draw((Graphics2D)g);
         }
+
     }
 
     public void add (XmasShape xs){
