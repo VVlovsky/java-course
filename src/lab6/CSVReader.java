@@ -11,11 +11,12 @@ public class CSVReader {
     String delimiter;
     boolean hasHeader;
 
+
     List<String> columnLabels = new ArrayList<>();
     Map<String, Integer> columnLabelsToInt = new HashMap<>();
     String[] current;
 
-    public CSVReader(String filename, String delimiter, boolean hasHeader) {
+    public CSVReader(String filename, String delimiter, boolean hasHeader, boolean needToParse) {
         try {
             reader = new BufferedReader(new FileReader(filename));
         } catch (FileNotFoundException e) {
@@ -23,7 +24,9 @@ public class CSVReader {
         }
 
         this.delimiter = delimiter;
+        if (needToParse) this.delimiter  = String.format("%s(?=([^\"]|\"[^\"]*\")*$)", delimiter);
         this.hasHeader = hasHeader;
+
 
         if (hasHeader) {
             try {
@@ -32,6 +35,10 @@ public class CSVReader {
                 e.printStackTrace();
             }
         }
+    }
+
+    public CSVReader(String filename, String delimiter, boolean hasHeader){
+        this(filename, delimiter, hasHeader, false);
     }
 
     public CSVReader(String filename, String delimiter) {
@@ -76,7 +83,7 @@ public class CSVReader {
         if (line == null) {
             return false;
         }
-        delimiter = String.format("%s(?=([^\"]|\"[^\"]*\")*$)", delimiter);
+
         current = line.split(delimiter);
         for (int i = 0; i < current.length; i++) {
             current[i] = current[i].trim();

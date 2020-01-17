@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminUnitList {
-    String filepath = "/home/vvlovsky/Work/JavaProjects/JavaLabs/src/lab7/admin-units.csv";
+    String filepath = "/home/vvlovsky/Work/JavaProjects/java-university-classes/src/lab7/admin-units.csv";
     List<AdminUnit> units = new ArrayList<>();
 
     AdminUnitList(List<AdminUnit> lst){

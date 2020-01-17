@@ -7,7 +7,7 @@ import java.util.Locale;
 public class TestCSV {
 
     public static void main(String[] args) throws IOException {
-        CSVReader reader = new CSVReader("/home/vvlovsky/Work/JavaProjects/JavaLabs/src/lab6/csv_examples/titanic-part.csv", ",", true);
+        CSVReader reader = new CSVReader("/home/vvlovsky/Work/JavaProjects/java-university-classes/src/lab6/csv_examples/titanic-part.csv", ",", true, true);
         while (reader.next()) {
             String id = reader.get("Name");
             System.out.printf("%s", id);
