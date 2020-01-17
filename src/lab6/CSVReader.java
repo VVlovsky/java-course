@@ -1,9 +1,9 @@
 package lab6;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class CSVReader {
@@ -42,6 +42,19 @@ public class CSVReader {
         this(filename, ";");
     }
 
+    public CSVReader(Reader reader, String delimiter, boolean hasHeader) {
+        this.reader = new BufferedReader(reader);
+        this.delimiter = delimiter;
+        this.hasHeader = hasHeader;
+        if (hasHeader) {
+            try {
+                parseHeader();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     void parseHeader() throws IOException {
         String line = reader.readLine();
@@ -63,7 +76,7 @@ public class CSVReader {
         if (line == null) {
             return false;
         }
-
+        delimiter = String.format("%s(?=([^\"]|\"[^\"]*\")*$)", delimiter);
         current = line.split(delimiter);
         for (int i = 0; i < current.length; i++) {
             current[i] = current[i].trim();
@@ -72,20 +85,55 @@ public class CSVReader {
     }
 
     public int getInt(String colName) {
-        int i = columnLabelsToInt.get(colName);
-        if (current[i].equals("")) {
+        try {
+            int i = columnLabelsToInt.get(colName);
+            return Integer.parseInt(current[i]);
+        } catch (Exception e) {
             return 0;
         }
-        return Integer.parseInt(current[i]);
+    }
+
+    public int getInt(int i) {
+        try {
+            return Integer.parseInt(current[i]);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     public double getDouble(String colName) {
-        int i = columnLabelsToInt.get(colName);
-        if (current[i].equals("")) {
+        try {
+            int i = columnLabelsToInt.get(colName);
+            return Double.parseDouble(current[i]);
+        } catch (Exception e) {
             return 0;
         }
-        return Double.parseDouble(current[i]);
     }
+
+    public double getDouble(int index) {
+        try {
+            return Double.parseDouble(current[index]);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    public long getLong(String colName) {
+        try {
+            return Long.parseLong(current[columnLabelsToInt.get(colName)]);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    public long getLong(int i) {
+        try {
+            return Long.parseLong(current[i]);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
 
     public String get(int index) {
         return current[index];
@@ -93,6 +141,26 @@ public class CSVReader {
 
     public String get(String column) {
         return current[columnLabelsToInt.get(column)];
+    }
+
+
+    public LocalTime getTime(int index, String format) {
+        return LocalTime.parse(get(index), DateTimeFormatter.ofPattern(format));
+    }
+
+
+    public LocalTime getTime(String column, String format) {
+        return LocalTime.parse(get(column), DateTimeFormatter.ofPattern(format));
+    }
+
+
+    public LocalDate getDate(int index, String format) {
+        return LocalDate.parse(get(index), DateTimeFormatter.ofPattern(format));
+    }
+
+
+    public LocalDate getDate(String column, String format) {
+        return LocalDate.parse(get(column), DateTimeFormatter.ofPattern(format));
     }
 
     List<String> getColumnLabels() {
