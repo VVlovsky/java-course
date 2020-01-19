@@ -12,6 +12,7 @@ import static java.awt.BasicStroke.JOIN_MITER;
 public class ClockWithGui extends JPanel {
 
     LocalTime time = LocalTime.now();
+    ClockThread ct;
 
     class ClockThread extends Thread {
         @Override
@@ -31,15 +32,12 @@ public class ClockWithGui extends JPanel {
 
             }
         }
-
-        ClockThread() {
-
-        }
     }
 
     ClockWithGui() {
-
-        new ClockThread().start();
+        super();
+        ct = new ClockThread();
+        ct.start();
     }
 
     public static void main(String[] args) {
@@ -50,10 +48,6 @@ public class ClockWithGui extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);
         frame.setVisible(true);
-
-
-        new ClockWithGui();
-
     }
 
     public void paintComponent(Graphics g) {
@@ -70,19 +64,14 @@ public class ClockWithGui extends JPanel {
 
         }
 
+        g2d.drawOval(-100, -100, 200, 200);
+        g2d.drawOval(-135, -135, 270, 270);
+
 
         for (int i = 0; i < 60; i++) {
 
             g2d.drawLine(0, -90, 0, -97);
             g2d.rotate(2 * Math.PI / 60);
-//            g2d.setTransform(saveAT);
-
-//            AffineTransform at2 = new AffineTransform();
-//            at2.rotate(2 * Math.PI / 12 * i);
-//            Point2D src = new Point2D.Float(0, -120);
-//            Point2D trg = new Point2D.Float();
-//            at2.transform(src, trg);
-//            g2d.drawLine((int) trg.getX(), (int) trg.getY(), (int) trg.getX()-10, (int) trg.getY());
         }
 
         AffineTransform saveAT = g2d.getTransform();

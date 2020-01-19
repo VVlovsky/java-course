@@ -7,10 +7,6 @@ public class Clock extends Thread {
     @Override
     public void run() {
 
-        ClockWithGui cwg = new ClockWithGui();
-        ClockWithGui.ClockThread ct = cwg.new ClockThread();
-        ct.start();
-
         while (true) {
             LocalTime time = LocalTime.now();
             System.out.printf("%02d:%02d:%02d\n",
