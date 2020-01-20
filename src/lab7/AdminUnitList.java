@@ -4,10 +4,7 @@ import lab6.CSVReader;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AdminUnitList {
     String filepath = "/home/vvlovsky/Work/JavaProjects/java-university-classes/src/lab7/admin-units.csv";
@@ -63,7 +60,6 @@ public class AdminUnitList {
         for (AdminUnit au : units) {
             au.fixMissingValues();
         }
-
 
 
         adminUnit2ParentId.forEach((au, parId) -> {
@@ -131,6 +127,34 @@ public class AdminUnitList {
             }
         }
         return aul;
+    }
+
+
+    AdminUnitList sortInplaceByName() {
+        class NameComparator implements Comparator<AdminUnit> {
+            @Override
+            public int compare(AdminUnit a, AdminUnit b) {
+                return a.name.compareTo(b.name);
+            }
+        }
+        units.sort(new NameComparator());
+        return this;
+    }
+
+    AdminUnitList sortInplaceByArea() {
+        units.sort(
+                new Comparator<AdminUnit>() {
+                    @Override
+                    public int compare(AdminUnit a, AdminUnit b) {
+                        return Double.compare(a.area, b.area);
+                    }
+                });
+        return this;
+    }
+
+    AdminUnitList sortInplaceByPopulation() {
+        units.sort((a, b) -> Double.compare(a.population, b.population));
+        return this;
     }
 
 
