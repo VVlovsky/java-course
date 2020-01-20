@@ -1,6 +1,7 @@
 package lab12;
 
 import java.util.Locale;
+import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -10,10 +11,7 @@ public class Mean {
     static BlockingQueue<Double> results = new ArrayBlockingQueue<Double>(100);
 
     static void initArray(int size) {
-        array = new double[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = Math.random() * size / (i + 1);
-        }
+        array = new Random().doubles(size, 1, 100).toArray();
         arrLength = size;
     }
 
@@ -30,9 +28,9 @@ public class Mean {
         public void run() {
             double sum = 0;
             for (int i = start; i < end; i++) {
-                sum = sum + (array[i] / 10000);
+                sum = sum + (array[i] / (end-start));
             }
-            mean = (sum / (end - start)) * 10000;
+            mean = sum;
 
             System.out.printf(Locale.US, "%d-%d mean=%f\n", start, end, mean);
             try {
@@ -80,8 +78,8 @@ public class Mean {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        initArray(128000000);
-        for (int cnt : new int[]{1, 2, 4, 6, 8, 16, 32, 64, 128}) {
+        initArray(100000000);
+        for (int cnt : new int[]{8}) {
             parallelMean(cnt);
         }
     }

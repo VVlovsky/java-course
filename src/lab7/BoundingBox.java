@@ -73,9 +73,6 @@ public class BoundingBox {
 
     //(ang. haversine formula)
     double distanceTo(BoundingBox bbx) {
-        if (this.isEmpty()) {
-            throw new RuntimeException("Not implemented");
-        }
         return Math.sqrt(Math.pow(this.getCenterX() - bbx.getCenterX(), 2) + Math.pow(this.getCenterY() - bbx.getCenterY(), 2));
     }
 
