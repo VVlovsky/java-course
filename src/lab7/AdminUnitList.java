@@ -5,6 +5,7 @@ import lab6.CSVReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class AdminUnitList {
     String filepath = "/home/vvlovsky/Work/JavaProjects/java-university-classes/src/lab7/admin-units.csv";
@@ -157,5 +158,52 @@ public class AdminUnitList {
         return this;
     }
 
+    AdminUnitList sortInplace(Comparator<AdminUnit> cmp) {
+        units.sort(cmp);
+        return this;
+    }
+
+    AdminUnitList sort(Comparator<AdminUnit> cmp) {
+        AdminUnitList aul = new AdminUnitList();
+        aul.units.addAll(this.units);
+        return aul.sortInplace(cmp);
+    }
+
+    /**
+     * @param pred referencja do interfejsu Predicate
+     * @return nową listę, na której pozostawiono tylko te jednostki,
+     * dla których metoda test() zwraca true
+     */
+    AdminUnitList filter(Predicate<AdminUnit> pred) {
+        AdminUnitList aul = new AdminUnitList();
+        this.units.forEach(au -> {
+            if (pred.test(au)) aul.units.add(au);
+        });
+        return aul;
+    }
+
+    AdminUnitList filter(Predicate<AdminUnit> pred, int limit) {
+        AdminUnitList aul = new AdminUnitList();
+        int counter = 0;
+        for (AdminUnit au : this.units) {
+            if (counter > limit) break;
+            if (pred.test(au)) aul.units.add(au);
+            counter++;
+
+        }
+        return aul;
+    }
+
+    AdminUnitList filter(Predicate<AdminUnit> pred, int limit, int offset) {
+        AdminUnitList aul = new AdminUnitList();
+        int counter = 0;
+        for (AdminUnit au : this.units) {
+            if (counter - offset > limit) break;
+            if (pred.test(au) && counter >= offset) aul.units.add(au);
+            counter++;
+
+        }
+        return aul;
+    }
 
 }
