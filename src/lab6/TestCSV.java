@@ -15,7 +15,7 @@ public class TestCSV {
         }
 
         String text = "a,b,c\n123.4,567.8,91011.12";
-        reader = new CSVReader(new StringReader(text),",",true);
+        reader = new CSVReader(new StringReader(text), ",", true);
         while (reader.next()) {
             double id = reader.getDouble("b");
             System.out.printf("%f", id);

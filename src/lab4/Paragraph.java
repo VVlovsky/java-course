@@ -8,7 +8,8 @@ public class Paragraph {
         this.setContent(content);
     }
 
-    Paragraph(){}
+    Paragraph() {
+    }
 
     String content;
 

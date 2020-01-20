@@ -34,7 +34,7 @@ public class Star implements XmasShape {
 
     @Override
     public void transform(Graphics2D g2d) {
-        g2d.translate(x,y);
-        g2d.scale(scale,scale);
+        g2d.translate(x, y);
+        g2d.scale(scale, scale);
     }
 }

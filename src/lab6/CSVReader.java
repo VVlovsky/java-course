@@ -24,7 +24,7 @@ public class CSVReader {
         }
 
         this.delimiter = delimiter;
-        if (needToParse) this.delimiter  = String.format("%s(?=([^\"]|\"[^\"]*\")*$)", delimiter);
+        if (needToParse) this.delimiter = String.format("%s(?=([^\"]|\"[^\"]*\")*$)", delimiter);
         this.hasHeader = hasHeader;
 
 
@@ -37,7 +37,7 @@ public class CSVReader {
         }
     }
 
-    public CSVReader(String filename, String delimiter, boolean hasHeader){
+    public CSVReader(String filename, String delimiter, boolean hasHeader) {
         this(filename, delimiter, hasHeader, false);
     }
 

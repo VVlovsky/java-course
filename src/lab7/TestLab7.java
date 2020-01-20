@@ -9,7 +9,7 @@ public class TestLab7 {
         aul.read();
 //        aul.list(System.out);
 //        aul.selectByName(".*mal.*", true).list(System.out);
-        aul.getNeighbours(aul.units.get(10), 25).units.forEach(au->{
+        aul.getNeighbours(aul.units.get(10), 25).units.forEach(au -> {
             System.out.println(au.toString());
         });
     }

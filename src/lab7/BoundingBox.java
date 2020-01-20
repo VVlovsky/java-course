@@ -76,7 +76,7 @@ public class BoundingBox {
         return Math.sqrt(Math.pow(this.getCenterX() - bbx.getCenterX(), 2) + Math.pow(this.getCenterY() - bbx.getCenterY(), 2));
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder b = new StringBuilder();
         b.append("[" + xmin + ", " + ymin + "] [" + xmax + ", " + ymax + "]\n");
         return b.toString();

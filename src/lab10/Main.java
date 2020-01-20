@@ -43,7 +43,6 @@ public class Main {
         dp.add(new Branch(500, 250, 10, DARKGREEN, true));
 
 
-
         dp.add(new Star(500, 105, 5, ORANGE));
 
 
@@ -66,31 +65,30 @@ public class Main {
                     for (int insideIX = -35; insideIX < 35; insideIX++) {
                         if (ix + insideIX == x) {
 
-                                for (int insideIY = -50; insideIY < 50; insideIY++) {
-                                    if (yarr[counter] + insideIY == y) {
-                                        notDraw = true;
-                                        break;
+                            for (int insideIY = -50; insideIY < 50; insideIY++) {
+                                if (yarr[counter] + insideIY == y) {
+                                    notDraw = true;
+                                    break;
 
-                                    }
-                                }break;
+                                }
+                            }
+                            break;
 
                         }
                     }
                 }
                 if (!notDraw) {
-                    if (x%2 != 0 && y%2 != 0){
+                    if (x % 2 != 0 && y % 2 != 0) {
                         dp.add(new SquareBubble(x, y, 1.8, new Color(r, g, b)));
-                    }else{
+                    } else {
                         dp.add(new Bubble(x, y, 0.3, BLACK, new Color(r, g, b)));
                     }
                     itsTimeToGenerate--;
-                    xarr[genNum-itsTimeToGenerate-1] = x;
-                    yarr[genNum-itsTimeToGenerate-1] = y;
+                    xarr[genNum - itsTimeToGenerate - 1] = x;
+                    yarr[genNum - itsTimeToGenerate - 1] = y;
                 }
             }
         }
-
-
 
 
         JFrame frame = new JFrame("Choinka");

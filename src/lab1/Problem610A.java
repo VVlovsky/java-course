@@ -14,10 +14,10 @@ public class Problem610A {
             tab[1] = i;
             tab[2] = n2 - i;
             tab[3] = n2 - i;
-            if (tab[0] == tab[2]){
+            if (tab[0] == tab[2]) {
                 continue;
             }
-            for (int ii = 0; ii < 4; ii++){
+            for (int ii = 0; ii < 4; ii++) {
                 System.out.print(tab[ii] + " ");
 
             }

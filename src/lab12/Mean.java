@@ -28,7 +28,7 @@ public class Mean {
         public void run() {
             double sum = 0;
             for (int i = start; i < end; i++) {
-                sum = sum + (array[i] / (end-start));
+                sum = sum + (array[i] / (end - start));
             }
             mean = sum;
 

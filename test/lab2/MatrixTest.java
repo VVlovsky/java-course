@@ -23,8 +23,8 @@ public class MatrixTest {
         double[][] exampleArray = {{1, 2}, {3, 4}};
         Matrix expected = new Matrix(exampleArray);
         double[][] asArrayOutput = expected.asArray();
-        for (int i = 0; i < asArrayOutput.length; i++){
-            for(int ii = 0; ii < asArrayOutput[i].length; ii++){
+        for (int i = 0; i < asArrayOutput.length; i++) {
+            for (int ii = 0; ii < asArrayOutput[i].length; ii++) {
                 assertEquals(asArrayOutput[i][ii], exampleArray[i][ii], 0.0);
             }
         }
@@ -34,7 +34,7 @@ public class MatrixTest {
     public void get() {
         double[][] exampleArray = {{1, 2}, {3, 4}};
         Matrix expected = new Matrix(exampleArray);
-        assertEquals(expected.get(2,1), 3, 0);
+        assertEquals(expected.get(2, 1), 3, 0);
     }
 
     @Test
@@ -49,23 +49,23 @@ public class MatrixTest {
     public void testToString() {
 
 
-        String s= "[[1.0,2.3,4.56], [12.3,  45, 21.8]]";
-        s= s.replaceAll("(\\[|\\]|\\s)+","");
+        String s = "[[1.0,2.3,4.56], [12.3,  45, 21.8]]";
+        s = s.replaceAll("(\\[|\\]|\\s)+", "");
         String[] t = s.split("(,)+");
-        for(String x:t){
-            System.out.println(String.format("\'%s\'",x ));
+        for (String x : t) {
+            System.out.println(String.format("\'%s\'", x));
         }
 
-        double[]d=new double[t.length];
-        for(int i=0;i<t.length;i++) {
+        double[] d = new double[t.length];
+        for (int i = 0; i < t.length; i++) {
             d[i] = Double.parseDouble(t[i]);
         }
 
-        double arr[][]=new double[1][];
-        arr[0]=d;
+        double arr[][] = new double[1][];
+        arr[0] = d;
 
-        for(int i=0;i<arr.length;i++){
-            for(int j=0;j<arr[i].length;j++){
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
                 System.out.println(arr[i][j]);
             }
         }
@@ -73,7 +73,7 @@ public class MatrixTest {
 
     }
 
-    @Test (expected = RuntimeException.class)
+    @Test(expected = RuntimeException.class)
     public void reshape() {
         double[][] exampleArray = {{1, 2}, {3, 4}};
         Matrix expected = new Matrix(exampleArray);
@@ -94,7 +94,7 @@ public class MatrixTest {
 
     @Test
     public void sub() {
-        Matrix expected = new Matrix(new double[][]{{1,2},{3,4}});
+        Matrix expected = new Matrix(new double[][]{{1, 2}, {3, 4}});
 //        Matrix diff = expected.sub(result);
 //        double err = diff.frobenius();
 //        assertEquals(err,0,1e-5);
