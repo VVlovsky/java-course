@@ -143,7 +143,11 @@ public class CSVReader {
 
 
     public String get(int index) {
-        return current[index];
+        try {
+            return current[index];
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public String get(String column) {

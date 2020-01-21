@@ -20,5 +20,9 @@ public class TestLab7 {
                 .sort((a, b) -> Double.compare(a.area, b.area))
                 .limit(100);
         query.execute().list(System.out);
+
+        var maxch = aul.units.stream()
+                .filter(unit -> unit.name.contains("ch")).min(Comparator.comparingDouble(a -> a.area));
     }
 }
+
