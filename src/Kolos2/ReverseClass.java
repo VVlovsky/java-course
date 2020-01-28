@@ -34,7 +34,7 @@ public class ReverseClass {
 
         public void run() {
             for (int i = start; i < end; i++) {
-                reversed[i - start] = toReverse[end - i];
+                reversed[i - start] = toReverse[end - i + start - 1];
             }
             sem.release();
         }
@@ -53,21 +53,13 @@ public class ReverseClass {
             e.printStackTrace();
         }
 
-        int currentCnt = 0;
-        int arrLen = toReverse.length;
-        int revLen;
-        int ii = 0;
-        for (int i = toReverse.length - 1; i >= 0; i--) {
-            revLen = threads.get(currentCnt).reversed.length;
-            toReverse[i] = threads.get(currentCnt).reversed[ii];
-            ii++;
-            if (ii == revLen) {
-                ii = 0;
-                currentCnt++;
+        int count = 0;
+        for (int i = cnt -1; i >= 0; i--){
+            for (int j = 0; j < threads.get(i).reversed.length; j++){
+                toReverse[count] = threads.get(i).reversed[j];
+                count++;
             }
         }
-        for (int i : toReverse) {
-            System.out.println(i);
-        }
+
     }
 }
